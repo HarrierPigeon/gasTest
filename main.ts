@@ -1,4 +1,7 @@
-function checkUpdate(e) {
+function checkUpdate(e: GoogleAppsScript.Events.SheetsOnEdit) {
+    for (let property in e) {
+        console.log(e[property])
+    }
     let searchSheet :SheetData= new SheetData(new RawSheetData(sheetConfigInfo));
     let searchData = search_("the WAN show", 50);
     if (searchData) {
