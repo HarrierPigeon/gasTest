@@ -1,6 +1,7 @@
 function checkUpdate(e: GoogleAppsScript.Events.SheetsOnEdit) {
-    for (let property in e) {
-        console.log(e[property])
+    if (e.range.getSheet().getSheetName() != sheetConfigInfo.tabName ||  e.range.getLastRow() > 5) {
+        console.log("out-of-bounds!")
+        return
     }
     let searchSheet :SheetData= new SheetData(new RawSheetData(sheetConfigInfo));
     // let searchData = search_("the WAN show", 50);
@@ -9,7 +10,7 @@ function checkUpdate(e: GoogleAppsScript.Events.SheetsOnEdit) {
     // }
     // let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetConfigInfo.tabName)
     // if (sheet) {
-        let queryData = searchSheet.rsd.sheet.getRange(1, 1, 2, 2)
+        let queryData = searchSheet.rsd.sheet.getRange(1, 1, 2, 2).getValues()
         
         let queryString = queryData[1][0]
         let maxRows = queryData[1][1]
