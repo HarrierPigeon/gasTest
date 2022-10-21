@@ -11,8 +11,8 @@ function checkUpdate(e: GoogleAppsScript.Events.SheetsOnEdit) {
     // if (sheet) {
         let queryData = searchSheet.rsd.sheet.getRange(1, 1, 2, 2)
         
-        let queryString = queryData[2][1]
-        let maxRows = queryData[2][2]
+        let queryString = queryData[1][0]
+        let maxRows = queryData[1][1]
     if (queryString != "" && +maxRows > 0) {
         let results = search_(queryString, maxRows)
         if (results) {
