@@ -1,4 +1,22 @@
 function checkUpdate(e) {
+    let searchSheet :SheetData= new SheetData(new RawSheetData(sheetConfigInfo));
+    let searchData = search_("the WAN show", 50);
+    if (searchData) {
+        searchSheet.setData(searchData);
+    }
+    // let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetConfigInfo.tabName)
+    // if (sheet) {
+        let queryData = searchSheet.rsd.sheet.getRange(1, 1, 2, 2)
+        
+        let queryString = queryData[2][1]
+        let maxRows = queryData[2][2]
+    if (queryString != "" && +maxRows > 0) {
+        let results = search_(queryString, maxRows)
+        if (results) {
+            searchSheet.setData(results)
+        }
+    }
+
     
 }
 
@@ -25,21 +43,13 @@ let sheetConfigInfo: sheetDataEntry = {
 }
 
 // thanks to https://stackoverflow.com/questions/784586/convert-special-characters-to-html-in-javascript
-function decodeHtmlCharCodes(str):string {
+function decodeHtmlCharCodes_(str):string {
     return str.replace(/(&#(\d+);)/g, function (match, capture, charCode) {
         return String.fromCharCode(charCode);
     });
 }
 
-function runSearch() {
-    let searchSheet = new SheetData(new RawSheetData(sheetConfigInfo))
-    let searchData = search("the WAN show",50)
-    if (searchData) {
-        searchSheet.setData(searchData);
-    }
-}
-
-function search(query: string,numResults:number): searchResult[] | undefined {
+function search_(query: string,numResults:number): searchResult[] | undefined {
     // let result:searchResult = {
     //     id: "",
     //     url: '',
@@ -72,8 +82,8 @@ function search(query: string,numResults:number): searchResult[] | undefined {
         
         output.id = String(item.id.videoId)
         output.url = "https://youtube.com/watch?v=" + String(item.id.videoId)
-        output.title = decodeHtmlCharCodes(String(item.snippet.title))
-        output.channel = decodeHtmlCharCodes(String(item.snippet.channelTitle))
+        output.title = decodeHtmlCharCodes_(String(item.snippet.title))
+        output.channel = decodeHtmlCharCodes_(String(item.snippet.channelTitle))
         output.pubDate = new Date(item.snippet.publishedAt)
         if (output.id != "undefined") {
             results.push(output)
