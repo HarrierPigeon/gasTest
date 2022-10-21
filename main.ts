@@ -3,10 +3,10 @@ function checkUpdate(e: GoogleAppsScript.Events.SheetsOnEdit) {
         console.log(e[property])
     }
     let searchSheet :SheetData= new SheetData(new RawSheetData(sheetConfigInfo));
-    let searchData = search_("the WAN show", 50);
-    if (searchData) {
-        searchSheet.setData(searchData);
-    }
+    // let searchData = search_("the WAN show", 50);
+    // if (searchData) {
+    //     searchSheet.setData(searchData);
+    // }
     // let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetConfigInfo.tabName)
     // if (sheet) {
         let queryData = searchSheet.rsd.sheet.getRange(1, 1, 2, 2)
