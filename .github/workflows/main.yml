@@ -3,7 +3,7 @@ name: gasTest
 on:
   workflow_dispatch:
   push:
-    branches: [dev]
+    branches: [main]
   release:
     types: [published]
   schedule:
