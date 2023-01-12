@@ -29,3 +29,5 @@ function cacheTesting() {
 
     console.log(sheet1.getConfigForCache())
 }
+
+// WYLO: Getting new CLASPRC token
