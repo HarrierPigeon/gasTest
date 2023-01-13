@@ -33,6 +33,30 @@ function cacheTesting() {
     let restoredSheetData = new SheetData(restoredSheetRSD)
     console.log(restoredSheetData.getConfigForCache())
     console.log(restoredSheetData.rsd.getEntryConfig())
+    console.log(compareInOutput(sheet1.rsd.getEntryConfig(), restoredSheetData.rsd.getEntryConfig()))
 }
+
+function compareInOutput(obj1: {}, obj2: {}) {
+    let keys1 = Object.getOwnPropertyNames(obj1)
+    let keys2 = Object.getOwnPropertyNames(obj2)
+    let differences: {} = {}
+
+    for (let key in obj1) {
+        if (obj2.hasOwnProperty(key)) {
+            if (obj1[key] != obj2[key]) {
+                differences[key] = obj1[key].toString() + ", " + obj2[key].toString()
+            }
+        } else {
+            differences[key] = key.toString() + " not on second object"
+        }
+    }
+    for (let key in obj2) {
+        if (!obj1.hasOwnProperty(key)) {
+            differences[key] = key.toString() + "not on first object"
+        }
+    }
+    return differences
+}
+
 
 // WYLO: Getting new CLASPRC token
