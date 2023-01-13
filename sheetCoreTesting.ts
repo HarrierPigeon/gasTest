@@ -26,8 +26,13 @@ let cache_config2: sheetDataEntry = {
 function cacheTesting() {
     let sheet1 = new SheetData(new RawSheetData(cache_config1))
     let sheet2 = new SheetData(new RawSheetData(cache_config2))
-
-    console.log(sheet1.getConfigForCache())
+    
+    let cachedSheet1 = sheet1.getConfigForCache()
+    console.log(sheet1.rsd.getEntryConfig())
+    let restoredSheetRSD = new RawSheetData(cachedSheet1)
+    let restoredSheetData = new SheetData(restoredSheetRSD)
+    console.log(restoredSheetData.getConfigForCache())
+    console.log(restoredSheetData.rsd.getEntryConfig())
 }
 
 // WYLO: Getting new CLASPRC token
