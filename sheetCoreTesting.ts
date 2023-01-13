@@ -27,13 +27,16 @@ function cacheTesting() {
     let sheet1 = new SheetData(new RawSheetData(cache_config1))
     let sheet2 = new SheetData(new RawSheetData(cache_config2))
     
-    let cachedSheet1 = sheet1.getConfigForCache()
-    console.log(sheet1.rsd.getEntryConfig())
-    let restoredSheetRSD = new RawSheetData(cachedSheet1)
-    let restoredSheetData = new SheetData(restoredSheetRSD)
-    console.log(restoredSheetData.getConfigForCache())
-    console.log(restoredSheetData.rsd.getEntryConfig())
-    console.log(compareInOutput(sheet1.rsd.getEntryConfig(), restoredSheetData.rsd.getEntryConfig()))
+
+    let sheetsToCache: SheetData[] = [sheet1, sheet2]
+    for (let sheet of sheetsToCache) {
+        let preCachedData = sheet.rsd.getEntryConfig()
+        let dataForCaching = sheet.getConfigForCache()
+        let restoredSheet = new SheetData(new RawSheetData(dataForCaching))
+        let postData = restoredSheet.rsd.getEntryConfig()
+        console.log(preCachedData.tabName, compareInOutput(preCachedData,postData))
+    }
+
 }
 
 function compareArrays(array1: any[], array2: any[]) {
