@@ -64,8 +64,9 @@ function compareInOutput(obj1: {}, obj2: {}) {
             if (obj1[key] != obj2[key]) {
                 if (isArray(obj1[key]) && isArray(obj2[key])) {
                     differences[key] = compareArrays(obj1[key], obj2[key])
+                } else {
+                    differences[key] = obj1[key].toString() + ", " + obj2[key].toString()
                 }
-                differences[key] = obj1[key].toString() + ", " + obj2[key].toString()
             }
         } else {
             differences[key] = key.toString() + " not on second object"
