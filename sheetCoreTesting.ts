@@ -51,6 +51,9 @@ function compareArrays(array1: any[], array2: any[]) {
     return differences
 }
 
+function isArray(object: any) {
+    return Object.prototype.toString.call(object) == '[object Object]'
+}
 function compareInOutput(obj1: {}, obj2: {}) {
     let keys1 = Object.getOwnPropertyNames(obj1)
     let keys2 = Object.getOwnPropertyNames(obj2)
@@ -59,7 +62,7 @@ function compareInOutput(obj1: {}, obj2: {}) {
     for (let key in obj1) {
         if (obj2.hasOwnProperty(key)) {
             if (obj1[key] != obj2[key]) {
-                if (obj1[key].isArray() && obj2[key].isArray()) {
+                if (isArray(obj1[key]) && isArray(obj2[key])) {
                     differences[key] = compareArrays(obj1[key], obj2[key])
                 }
                 differences[key] = obj1[key].toString() + ", " + obj2[key].toString()
