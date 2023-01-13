@@ -23,6 +23,8 @@ let cache_config2: sheetDataEntry = {
     allowWrite: false,
 };
 
+// WYLO: I think I should probably make a multiple-sheet-data-constructing thing inside of sheetCore?  Maaaayyyybe?  Would make it consistent at the very least?
+
 function cacheTesting() {
     let sheet1 = new SheetData(new RawSheetData(cache_config1))
     let sheet2 = new SheetData(new RawSheetData(cache_config2))
