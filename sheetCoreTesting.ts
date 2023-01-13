@@ -36,6 +36,21 @@ function cacheTesting() {
     console.log(compareInOutput(sheet1.rsd.getEntryConfig(), restoredSheetData.rsd.getEntryConfig()))
 }
 
+function compareArrays(array1: any[], array2: any[]) {
+    let maxLength = array1.length > array1.length ? array1.length : array2.length
+    let differences = {}
+    for (let i = 0; i < maxLength; i++){
+        if (array1.length < i) {
+            differences[i.toString()] = "DNE on array 1"
+        } else if(array2.length < i){
+            differences[i.toString()] = "DNE on array 2"
+        } else if (array1[i] != array2[i]) {
+            differences[i.toString()] = array1[i].toString() + ", " + array2[i].toString()
+        }
+    }
+    return differences
+}
+
 function compareInOutput(obj1: {}, obj2: {}) {
     let keys1 = Object.getOwnPropertyNames(obj1)
     let keys2 = Object.getOwnPropertyNames(obj2)
@@ -44,6 +59,9 @@ function compareInOutput(obj1: {}, obj2: {}) {
     for (let key in obj1) {
         if (obj2.hasOwnProperty(key)) {
             if (obj1[key] != obj2[key]) {
+                if (obj1[key].isArray() && obj2[key].isArray()) {
+                    differences[key] = compareArrays(obj1[key], obj2[key])
+                }
                 differences[key] = obj1[key].toString() + ", " + obj2[key].toString()
             }
         } else {
