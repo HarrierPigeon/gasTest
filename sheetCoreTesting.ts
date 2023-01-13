@@ -22,7 +22,7 @@ let cache_config2: sheetDataEntry = {
     sheetId: SpreadsheetApp.getActive().getId(),
     allowWrite: false,
 };
-
+// 
 // WYLO: I think I should probably make a multiple-sheet-data-constructing thing inside of sheetCore?  Maaaayyyybe?  Would make it consistent at the very least?
 
 function cacheTesting() {
