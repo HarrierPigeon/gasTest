@@ -3,7 +3,7 @@ name: gasTest
 on:
   workflow_dispatch:
   push:
-    branches: [main] # replace this with whatever branch you want to push from.
+    branches: [dev] # replace this with whatever branch you want to push from.
   release:
     types: [published]
   schedule:
