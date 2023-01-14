@@ -25,19 +25,40 @@ let cache_config2: sheetDataEntry = {
 // 
 // WYLO: I think I should probably make a multiple-sheet-data-constructing thing inside of sheetCore?  Maaaayyyybe?  Would make it consistent at the very least?
 
+/**
+ *  Returns time, in milliseconds, that something takes to execute
+ *
+ * @param {Date} startTime
+ * @return {*}  {number}
+ */
+function timeFunction(startTime: Date):number {
+    let endTime = new Date()
+
+    return endTime.getTime() - startTime.getTime()
+}
+
 function cacheTesting() {
+    
+    let startTime1 = new Date()
     let sheet1 = new SheetData(new RawSheetData(cache_config1))
     let sheet2 = new SheetData(new RawSheetData(cache_config2))
-    
+    let straight_up = timeFunction(startTime1)
 
+    let total_time: number = 0
     let sheetsToCache: SheetData[] = [sheet1, sheet2]
     for (let sheet of sheetsToCache) {
         let preCachedData = sheet.rsd.getEntryConfig()
         let dataForCaching = sheet.getConfigForCache()
+        let timer_two = new Date()
         let restoredSheet = new SheetData(new RawSheetData(dataForCaching))
+        straight_up += timeFunction(timer_two)
         let postData = restoredSheet.rsd.getEntryConfig()
-        console.log(preCachedData.tabName, compareInOutput(preCachedData,postData))
+        console.log(preCachedData.tabName, compareInOutput(preCachedData, postData))
     }
+
+    console.warn("Time (ms) to create two without restoring:", straight_up)
+    console.warn("Time (ms) to create with a cache-restore: ", total_time)
+
 
 }
 
