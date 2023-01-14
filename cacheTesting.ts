@@ -46,16 +46,17 @@ function cacheTesting() {
 
     let total_time: number = 0
     let sheetsToCache: SheetData[] = [sheet1, sheet2]
+    let timer_two = new Date()
     for (let sheet of sheetsToCache) {
         let preCachedData = sheet.rsd.getEntryConfig()
         let dataForCaching = sheet.getConfigForCache()
-        let timer_two = new Date()
-        let restoredSheet = new SheetData(new RawSheetData(dataForCaching))
-        straight_up += timeFunction(timer_two)
+        let dataString = JSON.stringify(dataForCaching)
+        let restoredSheet = new SheetData(new RawSheetData(JSON.parse(dataString)))
         let postData = restoredSheet.rsd.getEntryConfig()
         console.log(preCachedData.tabName, compareInOutput(preCachedData, postData))
     }
-
+    straight_up += timeFunction(timer_two)
+    
     console.warn("Time (ms) to create two without restoring:", straight_up)
     console.warn("Time (ms) to create with a cache-restore: ", total_time)
 
