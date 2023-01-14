@@ -141,6 +141,6 @@ let dataSet2: kiDataEntry[] = [
 function testJoiner() {
     let dataClass = new kiDataClass(dataSet1)
     dataClass.addIterant("iterant")
-    dataClass.leftJoin(dataSet2, 'areaID')
+    console.log(dataClass.leftJoin(dataSet2, 'areaID'))
 
 }
