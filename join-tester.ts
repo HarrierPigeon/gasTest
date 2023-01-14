@@ -142,5 +142,6 @@ function testJoiner() {
     let dataClass = new kiDataClass(dataSet1)
     dataClass.addIterant("iterant")
     console.log(dataClass.leftJoin(dataSet2, 'areaID').end)
+    console.log(dataClass.innerJoin(dataSet2,'areaID').end)
 
 }
