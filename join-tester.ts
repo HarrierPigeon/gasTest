@@ -137,11 +137,12 @@ let dataSet2: kiDataEntry[] = [
     { kiStat2: "AAAAAA", areaID: "467411" },
     { kiStat2: "AAAAAA", areaID: "500444" },
     { kiStat2: "AAAAAA", areaID: "500308" },
-]
+    { kiStat2: "AAAAAA", areaID: "ONLY_IN_RIGHT_JOIN" },
+];
 function testJoiner() {
-    let dataClass = new kiDataClass(dataSet1)
-    dataClass.addIterant("iterant")
-    console.log(dataClass.leftJoin(dataSet2, 'areaID').end)
-    console.log(dataClass.innerJoin(dataSet2,'areaID').end)
-
+    let dataClass = new kiDataClass(dataSet1);
+    dataClass.addIterant("iterant");
+    console.log(dataClass.leftJoin(dataSet2, 'areaID').end);
+    console.log(dataClass.innerJoin(dataSet2, 'areaID').end);
+    console.log(dataClass.rightJoin(dataSet2, 'areaID').end);
 }
