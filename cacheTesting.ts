@@ -44,7 +44,7 @@ function cacheTesting() {
     let sheet2 = new SheetData(new RawSheetData(cache_config2))
     let straight_up = timeFunction(startTime1)
 
-    let total_time: number = 0
+    let total_time = 0
     let sheetsToCache: SheetData[] = [sheet1, sheet2]
     let timer_two = new Date()
     for (let sheet of sheetsToCache) {
@@ -63,7 +63,7 @@ function cacheTesting() {
 
 }
 
-function compareArrays(array1: any[], array2: any[]) {
+function compareArrays(array1: unknown[], array2: unknown[]) {
     let maxLength = array1.length > array1.length ? array1.length : array2.length
     let differences = {}
     for (let i = 0; i < maxLength; i++){
@@ -78,16 +78,17 @@ function compareArrays(array1: any[], array2: any[]) {
     return differences
 }
 
-function isArray(object: any) {
+function isArray(object: unknown) {
     return Object.prototype.toString.call(object) == '[object Object]'
 }
-function compareInOutput(obj1: {}, obj2: {}) {
+function compareInOutput(obj1: object, obj2: object) {
     let keys1 = Object.getOwnPropertyNames(obj1)
     let keys2 = Object.getOwnPropertyNames(obj2)
-    let differences: {} = {}
+    let differences = {}
 
     for (let key in obj1) {
-        if (obj2.hasOwnProperty(key)) {
+        
+        if (Object.prototype.hasOwnProperty.call(obj2, key)) {
             if (obj1[key] != obj2[key]) {
                 if (isArray(obj1[key]) && isArray(obj2[key])) {
                     differences[key] = compareArrays(obj1[key], obj2[key])
@@ -100,7 +101,7 @@ function compareInOutput(obj1: {}, obj2: {}) {
         }
     }
     for (let key in obj2) {
-        if (!obj1.hasOwnProperty(key)) {
+        if (!Object.prototype.hasOwnProperty.call(obj1,key)) {
             differences[key] = key.toString() + "not on first object"
         }
     }

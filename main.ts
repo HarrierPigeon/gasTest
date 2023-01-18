@@ -70,7 +70,7 @@ function search_(query: string,numResults:number): searchResult[] | undefined {
     };
     const unparsed = YouTube.Search.list("id,snippet", queryBody)
     
-    if (unparsed === null && !unparsed.hasOwnProperty("items")) {
+    if (unparsed === null && !Object.prototype.hasOwnProperty.call(unparsed,"items")) {
         console.error("unable to find matching videos")
         return
         }
@@ -98,6 +98,8 @@ function search_(query: string,numResults:number): searchResult[] | undefined {
         
     })
 
+    } catch (error) {
+        console.error(error)
     }
     return results
 }
