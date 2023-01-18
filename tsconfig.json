@@ -12,8 +12,8 @@
         "outDir": "./ts",
         "rootDir": "./",
         "typeRoots": [
-            "./typescript-interfaces.ts",
-            "./dataManipulator.ts"
+            "./sheetCore/typescript-interfaces.ts",
+            "./sheetCore/dataManipulator.ts"
         ]
     }
 }
