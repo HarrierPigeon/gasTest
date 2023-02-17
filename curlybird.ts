@@ -14,5 +14,6 @@ function test1(){
     }
     let test2 = UrlFetchApp.fetch(url, fetchArgs)
     let response = JSON.parse(test2.getContentText())
-    console.log(test2);
+    console.log(response);
+    
 }
