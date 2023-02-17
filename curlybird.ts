@@ -4,18 +4,23 @@ function test1(){
         headerRow: 5,
         initialColumnOrder: {
             line1: 0,
-            line2:1
+
         },
         includeSoftcodedColumns: true
     }
+    let sheet = new SheetData(new RawSheetData(config))
 
     let url1 = "https://github.com/texas-mcallen-mission/sheetCore"
     let fetchArgs: GoogleAppsScript.URL_Fetch.URLFetchRequestOptions = {
         muteHttpExceptions: true,
     }
-    console.log(getDataFromURL(url1))
+    // console.log(getDataFromURL(url1))
     let url2 = composeGitUrl("texas-mcallen-mission", "sheetCore")
-    console.log(getDataFromURL(url2))
+    const response = getDataFromURL(url2)
+
+    let keys = Object.keys(response)
+    sheet.addKeysFromArray(keys)
+    sheet.setData(response)
 }
 
 function getDataFromURL(url: string) {
@@ -28,7 +33,7 @@ function getDataFromURL(url: string) {
 }
 
 function composeGitUrl(ownerName:string,repoName:string) {
-    const baseURL = "https://github.com"
-    
-    return baseURL + "/"+ownerName + "/"+repoName
+    //https://api.github.com/repos/RaviKharatmal/test/contents
+    const baseURL = "https://api.github.com";
+    return baseURL + "/repos/" + ownerName + "/" + repoName + "/contents";
 }
